@@ -67,8 +67,49 @@ function formatDay(date) {
   }).format(date);
 }
 
+
 function iconUrl(iconCode) {
   return `https://openweathermap.org/img/wn/${encodeURIComponent(iconCode)}@2x.png`;
+}
+
+function updateWeatherBackground(weather, iconCode) {
+  const body = document.body;
+  const condition = weather.toLowerCase();
+  const isNight = iconCode.endsWith("n");
+
+  body.classList.remove(
+    "weather-clear",
+    "weather-clouds",
+    "weather-rain",
+    "weather-thunderstorm",
+    "weather-snow",
+    "weather-mist",
+    "weather-night"
+  );
+
+  if (isNight) {
+    body.classList.add("weather-night");
+    return;
+  }
+
+  if (condition.includes("thunderstorm")) {
+    body.classList.add("weather-thunderstorm");
+  } else if (condition.includes("rain") || condition.includes("drizzle")) {
+    body.classList.add("weather-rain");
+  } else if (condition.includes("snow")) {
+    body.classList.add("weather-snow");
+  } else if (
+    condition.includes("mist") ||
+    condition.includes("fog") ||
+    condition.includes("haze") ||
+    condition.includes("smoke")
+  ) {
+    body.classList.add("weather-mist");
+  } else if (condition.includes("cloud")) {
+    body.classList.add("weather-clouds");
+  } else {
+    body.classList.add("weather-clear");
+  }
 }
 
 
@@ -100,6 +141,10 @@ function renderCurrentWeather(data) {
   weatherElements.city.textContent = `${data.name}, ${data.sys.country}`;
   weatherElements.description.textContent = data.weather[0].description;
   weatherElements.icon.src = iconUrl(data.weather[0].icon);
+  updateWeatherBackground(
+  data.weather[0].main,
+  data.weather[0].icon
+);
   weatherElements.icon.alt = data.weather[0].description;
   weatherElements.temperature.textContent = Math.round(data.main.temp);
   weatherElements.feelsLike.textContent =

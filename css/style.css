@@ -298,10 +298,15 @@ h1 > span {
   column-gap: 8px;
 }
 
+
 .temperature-block img {
-  width: 75px;
-  height: 75px;
+  display: block;
+  width: 110px;
+  height: 110px;
   object-fit: contain;
+  background: transparent;
+  filter: none;
+  opacity: 1;
 }
 
 .temperature-block > p {
@@ -404,8 +409,8 @@ h1 > span {
 }
 
 .forecast-card img {
-  width: 58px;
-  height: 58px;
+  width: 76px;
+  height: 76px;
   object-fit: contain;
 }
 
@@ -565,8 +570,8 @@ footer > p {
   }
 
   .temperature-block img {
-    width: 53px;
-    height: 53px;
+    width: 70px;
+    height: 70px;
   }
 
   .temperature-block > p {
@@ -837,3 +842,16 @@ footer {
     background: rgba(255, 255, 255, 0.72);
   }
 }
+
+
+/* WeatherWise: keep the current weather icon visible */
+.temperature-block img {
+  display: block;
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+  background: transparent;
+  filter: none;
+  opacity: 1;
+}
+
